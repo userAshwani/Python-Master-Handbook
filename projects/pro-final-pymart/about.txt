@@ -1,0 +1,30 @@
+PROJECT: PyMart Inventory & Analytics Engine (pro-final-pymart)
+==================================================================
+
+WHAT TO BUILD:
+  The capstone that wires all 4 prior modules into one runnable pipeline:
+  raw multi-source inventory data -> normalize -> RBAC mask -> analytics
+  report -> lazily streamed + safely JSON-serialized output. This is the
+  final, demonstrable portfolio piece for Project 1.
+
+FUNCTIONS TO IMPLEMENT:
+  step1_normalize(batch, source)     — normalize a raw batch via pro-2
+  step2_apply_rbac(records, role)    — mask records via pro-3
+  step3_generate_report(records)     — build pivot/report via pro-4
+  step4_audit_trail(before, after)   — deep_diff + safe_json_dumps a change log
+  stream_records(batches)            — generator-based lazy record stream
+  safe_json_dumps(value)             — JSON serialization tolerant of cycles
+  build_pipeline(role)               — pipe() the 4 steps into one callable
+
+EXPECTED RESULT:
+  Input:  RAW_INVENTORY (list of raw supplier rows)
+  Output: printed pivot table, running totals, summary stats, and an
+          audit trail diff, all produced by running main.py once.
+
+PREREQUISITE QUESTIONS:
+  ques-19 (lazy streaming generator), ques-20 (safe JSON serializer)
+  Also requires: all ques 1-18 (modules 1.1-1.4 complete)
+
+HOW IT CONNECTS TO THE FINAL PROJECT:
+  This IS the final project. Running `python main.py` here is the
+  demonstration that every prior module works together end-to-end.

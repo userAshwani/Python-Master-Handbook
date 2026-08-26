@@ -1,0 +1,29 @@
+PROJECT: Analytics Engine (pro-4-analytics-engine)
+=====================================================
+
+WHAT TO BUILD:
+  A reporting engine that turns normalized, RBAC-masked inventory records
+  into business intelligence: pivot tables, running totals, moving
+  averages, and sorted multi-key reports. Also includes an Observer /
+  pub-sub event system and a token-bucket rate limiter for guarding
+  expensive report generation.
+
+FUNCTIONS TO IMPLEMENT:
+  EventBus                         — subscribe/unsubscribe/publish pub-sub class
+  RateLimiter                      — token-bucket allow(key) rate limiter
+  pivot_table(records, row, col, val) — 2D aggregation table
+  running_total(records, key)      — cumulative running sum
+  moving_average(records, key, n)  — sliding-window average
+  multi_key_sort(records, config)  — sort by multiple keys with per-key direction
+
+EXPECTED RESULT:
+  Input:  pivot_table(orders, "warehouse", "status", "quantity")
+  Output: {"WH-1": {"shipped": 120, "pending": 30}, "WH-2": {"shipped": 45}}
+
+PREREQUISITE QUESTIONS:
+  ques-14 (pub-sub events), ques-15 (rate limiter), ques-16 (pivot table),
+  ques-17 (running total / moving average), ques-18 (multi-key sort)
+
+HOW IT CONNECTS TO THE FINAL PROJECT:
+  The capstone's step3_generate_report() calls these functions to build
+  the final inventory report shown at the end of the pipeline run.

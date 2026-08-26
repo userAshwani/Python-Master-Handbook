@@ -1,0 +1,30 @@
+PROJECT: Data Normalizer (pro-2-data-normalizer)
+==================================================
+
+WHAT TO BUILD:
+  An adapter layer that ingests inventory/order records from 3 different
+  raw source formats — CSV row dicts, a JSON supplier API, and a legacy
+  nested XML-like dict feed — and converts every one of them into one
+  canonical PyMart record schema. Also includes recursive permission-tree
+  resolution, deep object diffing, and concurrency-limited batch fetching.
+
+FUNCTIONS TO IMPLEMENT:
+  csv_row_adapter(raw)                  — CSV row dict -> canonical record
+  json_api_adapter(raw)                 — JSON API dict -> canonical record
+  legacy_xml_adapter(raw)               — nested legacy dict -> canonical record
+  normalize_batch(rows, source)         — dispatch a batch through the right adapter
+  resolve_permissions(tree, role)       — recursively resolve inherited permissions
+  deep_diff(a, b)                       — recursively detect changes between two records
+  fetch_batch_limited(fetch_fns, limit) — run fetch callables with a concurrency cap
+
+EXPECTED RESULT:
+  Input:  csv_row_adapter({"sku": "A1", "qty": "10", "price": "9.99"})
+  Output: {"sku": "A1", "quantity": 10, "unit_price": 9.99, "source": "csv"}
+
+PREREQUISITE QUESTIONS:
+  ques-7 (adapters), ques-8 (permission tree), ques-9 (deep diff),
+  ques-10 (concurrent batch fetch)
+
+HOW IT CONNECTS TO THE FINAL PROJECT:
+  The capstone's step1_normalize() calls normalize_batch() to turn every
+  raw inventory feed into one shape before RBAC and analytics ever see it.

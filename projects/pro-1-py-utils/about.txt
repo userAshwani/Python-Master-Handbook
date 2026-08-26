@@ -1,0 +1,32 @@
+PROJECT: Py Utility Belt (pro-1-py-utils)
+==========================================
+
+WHAT TO BUILD:
+  A reusable Python utility module — a collection of core helper
+  functions that every other module in this series will import and use.
+  Think of it as your own miniature `toolz` / `functools` extension,
+  built from scratch.
+
+FUNCTIONS TO IMPLEMENT:
+  deep_copy(value)               — recursive deep copy of any value
+  flatten_dict(d, prefix="")     — nested dict keys → dot-notation flat dict
+  flatten_list(lst)              — arbitrary-depth nested list → single flat list
+  pipe(*fns)                     — left-to-right function composition
+  compose(*fns)                  — right-to-left function composition
+  memoize(fn, ttl=None)          — cache function results with TTL expiry
+  curry(fn)                      — convert multi-arg fn into chained single-arg calls
+  partial_(fn, *preset_args)     — pre-fill positional arguments from the left
+
+EXPECTED RESULT:
+  Input to pipe:     pipe(double, add_ten)(3)             -> 16
+  Input to memoize:  memoize(expensive_fn, ttl=5)(a, b)    -> cached until TTL expires
+  Input to flatten:  flatten_dict({"a": {"b": 1}})         -> {"a.b": 1}
+  All functions importable from utils.py.
+
+PREREQUISITE QUESTIONS:
+  ques-1 (deep_copy), ques-2 (flatten_dict), ques-3 (flatten_list),
+  ques-4 (pipe/compose), ques-5 (memoize with TTL), ques-6 (curry/partial)
+
+HOW IT CONNECTS TO THE FINAL PROJECT:
+  Every other module (normalizer, RBAC, analytics, capstone) imports these
+  utils. This is the foundation layer — build it solid before moving on.

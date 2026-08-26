@@ -1,0 +1,28 @@
+PROJECT: RBAC Engine (pro-3-rbac-engine)
+==========================================
+
+WHAT TO BUILD:
+  A security layer controlling exactly which inventory fields each user
+  role is allowed to see. Includes a reusable LRU cache for permission
+  lookups, a Trie for fast SKU/autocomplete search, and field-level
+  masking helpers for sensitive contact data.
+
+FUNCTIONS TO IMPLEMENT:
+  LRUCache(capacity)         — OrderedDict-based least-recently-used cache
+  Trie()                     — prefix tree supporting insert/search/starts_with
+  mask_email(email)          — partially mask an email address
+  mask_phone(phone)          — partially mask a phone number
+  apply_rbac(record, role)   — combine permission resolution + masking on one record
+
+EXPECTED RESULT:
+  Input:  mask_email("jane.doe@pymart.io")
+  Output: "ja***@pymart.io"
+
+PREREQUISITE QUESTIONS:
+  ques-11 (LRU cache), ques-12 (Trie), ques-13 (field masking)
+  (also reuses ques-8 resolve_permissions from pro-2-data-normalizer)
+
+HOW IT CONNECTS TO THE FINAL PROJECT:
+  The capstone's step2_apply_rbac() calls apply_rbac() on every normalized
+  record before it reaches the analytics engine, ensuring restricted
+  fields never leak to a lower-privileged role.
